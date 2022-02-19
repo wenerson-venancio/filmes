@@ -2,15 +2,22 @@ import React from 'react';
 import { Feather } from '@expo/vector-icons'
 import { Container, MenuButton, Title } from './styles';
 
+import { useNavigation } from '@react-navigation/native';
 
-function Header(){
+    
+
+function Header({ title }){
+
+    const navigation = useNavigation();
+
     return(
         <Container>
-            <MenuButton>
+            <MenuButton onPress={ () => navigation.openDrawer()}>
                 <Feather name="menu" size={36} color="#FFF"/>
             </MenuButton> 
+            <Title>{title}</Title>
         </Container>
     )
-}
+} 
 
 export default Header;
