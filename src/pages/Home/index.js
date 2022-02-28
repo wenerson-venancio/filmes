@@ -122,7 +122,7 @@ function Home() {
             <Header title="Prime Movie"/>
             <SearchContainer>
                 <Input
-                    placeholder="Ex Vingadores"
+                    placeholder="Pesquise um filme"
                     placeholderTextColor="#ddd"
                 />
                 <SearchButton>
