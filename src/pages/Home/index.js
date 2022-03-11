@@ -25,15 +25,15 @@ import { useNavigation } from '@react-navigation/native';
 
 function Home() {
 
+
+    
+    const navigation = useNavigation();
     const [nowMovies, setNowMovies] = useState([]);
     const [popularMovies, setPopularMovies] = useState([]);
     const [topMovies, setTopMovies] = useState([]);
-
     const [bannerMovie, setBannerMovie] = useState({});
-
     const [loading, setLoading] = useState(true);
-
-    const navigation = useNavigation();
+    const [input, setInput] = useState(''); // State campo pesquisar filme
 
 
 
@@ -76,7 +76,7 @@ function Home() {
                 const popularList = getListMovies(10, popularData.data.results);
                 const topList = getListMovies(10, topData.data.results);
     
-                setBannerMovie(nowData.data.results[3]);
+                setBannerMovie(nowData.data.results[9]);
                 
     
                 setNowMovies(nowList);
@@ -97,12 +97,20 @@ function Home() {
 
     }, [])
 
-
+    
+    
     //função que leva para os detalhes de cada filme
     function navigateDetailsPage(item){
         navigation.navigate('Detail', { id: item.id })
     }
+    
+    function handleSearchMovie(){
 
+        if(input === '')return;
+
+        navigation.navigate('Search', { name: input })
+        setInput('');
+    }
 
     if(loading){
         return(
@@ -124,10 +132,14 @@ function Home() {
                 <Input
                     placeholder="Pesquise um filme"
                     placeholderTextColor="#ddd"
+                    value={input}
+                    onChangeText={(text)=>setInput(text)}
                 />
-                <SearchButton>
+
+                <SearchButton onPress={handleSearchMovie}>
                     <Feather name="search" size={30} color="#fff"/>
                 </SearchButton>
+
             </SearchContainer>
             <ScrollView showsVerticalScrollIndicator={false}>
 
